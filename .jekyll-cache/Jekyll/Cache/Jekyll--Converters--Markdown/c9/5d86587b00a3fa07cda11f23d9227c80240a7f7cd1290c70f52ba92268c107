@@ -1,0 +1,63 @@
+I"w<h3 id="iot-hacking-günlükleri---part-1"><strong><center>IOT Hacking Günlükleri - Part 1</center></strong></h3>
+
+<p>IOT Hacking için belkide en önemli yapılarından biri olan Firmware hacking’i biraz yakından inceleyip kullanılan tool’lar hakkında bilgi vereceğim.</p>
+
+<p>Firmware Hacking basit olarak 5 Adımda inceleyebiliriz.</p>
+
+<ol>
+  <li>Firmware’i elde etmek</li>
+  <li>Firmware’i inceleme</li>
+  <li>Filesystem’i çıkarma</li>
+  <li>Filesystem’i inceleme</li>
+  <li>Filesystem’i emule etme</li>
+</ol>
+
+<p>Bu 5 adımın sonunda elde etmek istediğimiz ve bu süreçte arayacağımız şeylere örnek vermek gerekirse;</p>
+
+<ol>
+  <li>Koda Gömülü Parolalar</li>
+  <li>API Token’ları</li>
+  <li>EndPoint’ler</li>
+  <li>Zafiyetli servisler ( Hak Yükseltme vs..)</li>
+  <li>Backdoor’lar</li>
+  <li>Yapılandırma dosyaları</li>
+  <li>Cihaz Üzerinde Olabilecek tüm zafiyetler</li>
+</ol>
+
+<p>Peki gelelim asıl soruya Firmware Nedir? Nasıl Hack Edilir?</p>
+
+<p><strong>Firmware:</strong> Donanımın kendisinden beklenen tüm fonksiyonları yerine getirmesi için kullanılan yazılımlara verilen addır.</p>
+
+<p>Firmware’i elde etmek için genel olarak kullanılan 4 metottan bahsedebiliriz.</p>
+
+<h4 id="a-üretici-firmaların-kendi-sitelerinden"><strong>A. Üretici firmaların kendi sitelerinden</strong></h4>
+
+<p>En yaygın yöntemlerden biri diyebiliriz. Birçok üretici Firmware güncellemelerini kendi sistemleri üzerinden bu şekilde paylaşıyor. Özellikle encrypt olmayan bu tarz paylaşımlar sayesinde oldukça kolay şekilde cihaz üzerinde koşan yazılıma sahip olabiliyoruz.</p>
+
+<p>Genellikle router üreticilerinin tercihi, internet sitelerinde ilgili güncellemeyi paylaşmak oluyor.</p>
+
+<h4 id="b-arama-motorlarını-kullanarak"><strong>B. Arama motorlarını kullanarak</strong></h4>
+
+<p>Burada örnek vermeye gerek görmüyorum. Bu tarz firmware’leri direkt olarak üretici sitesinden değil fakat bize firmware’i sunan başka bir endpoint’i aramak diyebiliriz.</p>
+
+<h4 id="c-cihaz-güncelleme-alırken-mitm-yaparak-"><strong>C. Cihaz güncelleme alırken MiTM yaparak </strong></h4>
+
+<p>Günümüzde oldukça yaygın bir yöntem örnek olarak akıllı TV’lerinizi internete bağladığınızda size yeni bir yazılım bulundu uyarısı verir. Basitçe çalışma prensibinden bahsedecek olursak uygulama çalışmaya başlayıp internete bağlandığında bir endpointe istek atarak güncel versiyon bilgisini alır daha sonra alınan bu versiyon bilgisi cihaz üzerindeki ile karşılaştırılır. Üst bir versiyon var ise cihaz o endpointe giderek kendine firmware’i indirir ve kurar. Modem arayüzüne girdiğinizde firmware güncelleme adımının otomatize edilmiş hali diyebiliriz.</p>
+
+<p>Örnek olarak bir Akıllı TV düşünelim güncelleme sırasında harici bir sisteme istek atıyor ve oradan firmware’ini alıyor olsun.</p>
+
+<p>Yapılabileceklerin başında cihaza proxy tanımlayıp giden istekler eğer okunabilirse (http/HTTPS) burp veya owasp zap ile gittiği endpointi alabilir o isteği yaparak kendi makinemize firmware’i indirebiliriz</p>
+
+<p>Fakat bu her zaman o kadar basit işlemiyor çoğu IOT cihaz üzerinde proxy tanımlama imkanımız bulunmuyor, tanımlasak bile BURP veya Zap gibi proxy tooların yakalayamayacağı socket isteği ile haberleşebilir. Bu durumda mitm yapmak daha mantıklı görünüyor. Çoğumuzun bildiği standart bir MITM dışında aşağıda size SSL üzerinden MITM nasıl gerçekleştirilir onu gösteriyor olacağım. Bu sayede ilgili cihaz/uygulama SSL bağlantı açmak istediğinde paketlerimiz yarıda kalmayacak.</p>
+
+<p>Bunu diğer yazımızda anlatmıştık.</p>
+
+<p>Bu sayede cihazın iletişimi kesilmiyor giden tüm istekleri görebiliyoruz. Kritik olabilecek bir nokta ise SSL pinning olan bir uygulama için bunu yaptığımızı varsayalım, firmware’i elde ettiniz giden paketleri incelemek istiyorsunuz. Elinizde firmware olduğu için bir sertifika ve private key bulunuyor. Siz yukarıdaki adımlarda belirtilen key üretme ve sertifika üretme adımı yerine bu sertifika ve keyi kullanarak SSL pinning’i de atlatmış oluyorsunuz ve giden paketleri rahatlıkla okuyabilirsiniz.</p>
+
+<h4 id="d-direk-olarak-cihaz-üzerinden"><strong>D. Direk olarak cihaz üzerinden</strong></h4>
+
+<p>Bu aslında sonraki yazılarımda değineceğim, Hardware hacking olarak geçen ve cihaz donanımında bulunan, bırakılmış veya unutulmuş iletişim pinleri sayesinde veya cihaz hafızasından firmware’i elde etmeyi hedefleyen adım. Detaylarını daha sonraki yazılarımda uzun uzun anlatıyor olacağım.</p>
+
+<p>Firmware’i elde ettik peki ya şimdi ?</p>
+
+:ET

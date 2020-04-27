@@ -1,0 +1,31 @@
+title: iotvulnlab
+author: iotvulnlab
+email: iotvulnlab@gmail.com
+description: > # this means to ignore newlines until "show_exerpts:"
+  About Security
+show_excerpts: true # set to true to show excerpts on the homepage
+baseurl: /
+
+sass:
+  sass_dir: _sass
+
+permalink: /posts/:title/
+texture:
+  title: iotvulnlab
+  tagline: Researcher
+  date_format: "%-d %b, %Y"
+  style: red
+  showNav: false
+  showPicker: false
+
+  # generate social links in footer
+  social_links:
+    twitter: 
+    github:  https://github.com/iotvulnlab
+    linkedIn: 
+    rss: rss
+
+
+plugins:
+  - jekyll-seo-tag
+#  - jekyll-feed
