@@ -4,8 +4,8 @@ email: iotvulnlab@gmail.com
 description: > # this means to ignore newlines until "show_exerpts:"
   About Security
 show_excerpts: true # set to true to show excerpts on the homepage
-baseurl: https://iotvulnlab.github.io
-
+baseurl: /
+url: https://iotvulnlab.github.io
 sass:
   sass_dir: _sass
 
